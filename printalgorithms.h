@@ -1,3 +1,7 @@
+/**
+ * Printing algorithms for more involved (but common) data structures
+ * Authors: Erich Gubler, erichdongubler@gmail.com
+ */
 #ifndef PRINTALGORITHMS_H
 #define PRINTALGORITHMS_H
 #include <vector>
