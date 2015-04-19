@@ -7,7 +7,7 @@
 
 // Similar to C#'s "tryParse"
 template<typename T>
-bool getNumber(T& storage)
+bool tryParseNumber(T& storage)
 {
 	std::string rawInput = "";
 	getline(std::cin, rawInput);
