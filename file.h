@@ -11,7 +11,7 @@
 std::string replaceFileExtension(const std::string& filePath, const std::string& extension)
 {
 	char c;
-	for(auto i = filePath.size() - 1; i >= 0; --i)
+	for(int i = filePath.size() - 1; i >= 0; --i)
 	{
 		c = filePath[i];
 		switch(c)
@@ -32,7 +32,7 @@ std::string replaceFileExtension(const std::string& filePath, const std::string&
 std::string baseFileName(const std::string& filePath)
 {
 	char c;
-	for(auto i = filePath.size() - 1; i >= 0; --i)
+	for(int i = filePath.size() - 1; i >= 0; --i)
 	{
 		c = filePath[i];
 		switch(c)
