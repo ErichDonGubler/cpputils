@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 // Similar to C#'s "tryParse"
 template<typename T>
