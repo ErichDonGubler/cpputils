@@ -5,7 +5,7 @@
 #ifndef PRINTALGORITHMS_H
 #define PRINTALGORITHMS_H
 #include <iostream>
-using namespace std;
+
 
 // Stream functor that prints random-access ranges of the form "[a, b, c]"
 template<typename Iter>
