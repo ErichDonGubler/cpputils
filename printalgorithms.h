@@ -117,4 +117,26 @@ void map_printer(Map& m)//TODO: Make const!
 	return MapPrinter<Map>(m);
 }
 
+void write(std::ostream& os){}
+
+template<typename T>
+void write(std::ostream& os, T&& t)
+{
+	os << t;
+}
+
+template<typename T, typename...Ts>
+void write(std::ostream& os, T&& t, Ts&&...ts)
+{
+	write(os, t);
+	write(os, ts...);
+}
+
+template<typename...Ts>
+void writeln(std::ostream& os, Ts&&...ts)
+{
+	write(os, ts...);
+	os << std::endl;
+}
+
 #endif
