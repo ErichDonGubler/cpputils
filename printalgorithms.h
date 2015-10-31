@@ -6,6 +6,21 @@
 #define PRINTALGORITHMS_H
 #include <iostream>
 
+void prettyprint(std::ostream& os, const char* t)
+{
+	os << '"' << t << '"';
+}
+
+void prettyprint(std::ostream& os, const std::string& t)
+{
+	prettyprint(os, t.c_str());
+}
+
+template<typename T>
+void prettyprint(std::ostream& os, T&& t)
+{
+	os << t;
+}
 
 // Stream functor that prints random-access ranges of the form "[a, b, c]"
 template<typename Iter>
@@ -22,9 +37,12 @@ public:
 	{
 		os << '[';
 		if(rp.begin != rp.end)
-			os << *rp.begin++;
+			prettyprint(os, *rp.begin++);
 		while(rp.begin != rp.end)
-			os << ", " << *rp.begin++;
+		{
+			os << ", ";
+			prettyprint(os, *rp.begin++);
+		}
 		return os << ']';
 	}
 };
@@ -50,9 +68,12 @@ public:
 	{
 		os << '[';
 		if(trp.begin != trp.end)
-			os << trp.func(*trp.begin++);
+			prettyprint(os, trp.func(*trp.begin++));
 		while(trp.begin != trp.end)
-			os << ", " << trp.func(*trp.begin++);
+		{
+			os << ", ";
+			prettyprint(os, trp.func(*trp.begin++));
+		}
 		return os << ']';
 	}
 };
