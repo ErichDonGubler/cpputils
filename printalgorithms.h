@@ -18,7 +18,7 @@ private:
 public:
 	RangePrinter(Iter b, Iter e) : begin(b), end(e) {}
 
-	friend ostream& operator<<(ostream& os, RangePrinter& rp)
+	friend std::ostream& operator<<(std::ostream& os, RangePrinter&& rp)
 	{
 		os << '[';
 		if(rp.begin != rp.end)
@@ -30,10 +30,9 @@ public:
 };
 
 template<typename T>
-void print_range(T begin, T end, std::ostream& os = std::cout)
+RangePrinter<T> range_printer(T begin, T end)
 {
-	auto rp = RangePrinter<T>(begin, end);
-	os << rp;
+	return RangePrinter<T>(begin, end);
 }
 
 template<typename Iter, typename F>
@@ -47,7 +46,7 @@ private:
 public:
 	TransformedRangePrinter(Iter b, Iter e, F f) : begin(b), end(e), func(f) {}
 
-	friend ostream& operator<<(std::ostream& os, TransformedRangePrinter& trp)
+	friend std::ostream& operator<<(std::ostream& os, TransformedRangePrinter&& trp)
 	{
 		os << '[';
 		if(trp.begin != trp.end)
@@ -59,10 +58,9 @@ public:
 };
 
 template<typename T, typename F>
-void print_transformed_range(T begin, T end, F f, std::ostream& os = std::cout)
+TransformedRangePrinter<T, F> transformed_range_printer(T begin, T end, F f)
 {
-	auto trp = TransformedRangePrinter<T, F>(begin, end, f);
-	os << trp;
+	return TransformedRangePrinter<T, F>(begin, end, f);
 }
 
 template<typename M>
@@ -73,7 +71,7 @@ private:
 
 public:
 	MapPrinter(M& m) : map(m) {}
-	friend ostream& operator<<(std::ostream& os, MapPrinter& mp)
+	friend std::ostream& operator<<(std::ostream& os, MapPrinter& mp)
 	{
 		auto begin = mp.map.begin();
 		auto end = mp.map.end();
@@ -93,9 +91,9 @@ public:
 };
 
 template<typename Map>
-void print_map(Map m, std::ostream& os = std::cout)
+void map_printer(Map& m)//TODO: Make const!
 {
-	auto mp = MapPrinter<Map>(m);
-	os << mp;
+	return MapPrinter<Map>(m);
 }
+
 #endif
