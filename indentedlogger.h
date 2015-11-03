@@ -13,12 +13,24 @@ public:
 		: indentString(indentString)
 	{}
 
-	template<typename...Ts>
-	void log(std::ostream& os, Ts...ts)
+	void writeIndentation(std::ostream& os)
 	{
 		for(auto i = 0; i < indentation; ++i)
 			write(os, indentString);
-		writeln(os, ts...);
+	}
+
+	template<typename...Ts>
+	void log(std::ostream& os, Ts...ts)
+	{
+		writeIndentation(os);
+		write(os, ts...);
+	}
+
+	template<typename...Ts>
+	void logln(std::ostream& os, Ts...ts)
+	{
+		log(os, ts...);
+		writeln(os);
 	}
 };
 
