@@ -31,7 +31,9 @@ private:
 	Iter end;
 
 public:
-	RangePrinter(Iter b, Iter e) : begin(b), end(e) {}
+	RangePrinter(Iter b, Iter e)
+		: begin(b), end(e)
+	{}
 
 	friend std::ostream& operator<<(std::ostream& os, RangePrinter&& rp)
 	{
@@ -44,6 +46,11 @@ public:
 			prettyprint(os, *rp.begin++);
 		}
 		return os << ']';
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, RangePrinter& rp)
+	{
+		return os << std::move(rp);
 	}
 };
 
@@ -62,7 +69,9 @@ private:
 	F func;
 
 public:
-	TransformedRangePrinter(Iter b, Iter e, F f) : begin(b), end(e), func(f) {}
+	TransformedRangePrinter(Iter b, Iter e, F f)
+		: begin(b), end(e), func(f)
+	{}
 
 	friend std::ostream& operator<<(std::ostream& os, TransformedRangePrinter&& trp)
 	{
@@ -75,6 +84,11 @@ public:
 			prettyprint(os, trp.func(*trp.begin++));
 		}
 		return os << ']';
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, TransformedRangePrinter& trp)
+	{
+		return os << std::move(trp);
 	}
 };
 
@@ -91,8 +105,11 @@ private:
 	M& map;
 
 public:
-	MapPrinter(M& m) : map(m) {}
-	friend std::ostream& operator<<(std::ostream& os, MapPrinter& mp)
+	MapPrinter(M& m)
+		: map(m)
+	{}
+
+	friend std::ostream& operator<<(std::ostream& os, MapPrinter&& mp)
 	{
 		auto begin = mp.map.begin();
 		auto end = mp.map.end();
@@ -108,6 +125,11 @@ public:
 			os << ", " << pair.first << ": " << pair.second;
 		}
 		return os << '}';
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, MapPrinter& mp)
+	{
+		return os << std::move(mp);
 	}
 };
 
